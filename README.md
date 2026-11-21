@@ -103,6 +103,7 @@ cp -r video-intelligence/skills/* .agents/skills/
 ## Links
 
 - **Showcase page**: [whyashthakker.github.io/video-intelligence](https://whyashthakker.github.io/video-intelligence/)
+- **Ceptory MCP Server guide**: [whyashthakker.github.io/video-intelligence/ceptory-mcp](https://whyashthakker.github.io/video-intelligence/ceptory-mcp/)
 - **Agent Skills spec**: [agentskills.io](https://agentskills.io)
 - **Default MCP server docs**: [ceptory.com/mcp](https://www.ceptory.com/mcp)
 

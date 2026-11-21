@@ -1,0 +1,16 @@
+# Video Intelligence Agent Skills & Ceptory MCP
+
+> Open-source Agent Skills (MIT) and Ceptory MCP Server setup documentation for connecting Claude Code, Claude Desktop, Cursor, VS Code, Codex, Gemini CLI, and Windsurf to video search, live CCTV workflows, alert triage, cross-camera tracking, and AI vision engines.
+
+## Pages
+- [Video Intelligence Agent Skills Showcase](https://whyashthakker.github.io/video-intelligence/): 11 open-source Agent Skills (`npx skills add whyashthakker/video-intelligence`).
+- [Ceptory MCP Server Guide](https://whyashthakker.github.io/video-intelligence/ceptory-mcp/): Complete Streamable HTTP (`https://mcp.ceptory.com/mcp`) and stdio (`npx -y ceptory-mcp`) setup, 30+ MCP tool reference, security, and FAQ.
+
+## Official Ceptory Links
+- [Ceptory Home](https://www.ceptory.com)
+- [Ceptory MCP Docs](https://www.ceptory.com/mcp)
+- [Ceptory MCP Machine-Readable Docs](https://www.ceptory.com/mcp/llms.txt)
+- [Ceptory Agent Skills](https://www.ceptory.com/skills)
+- [Video Intelligence REST API](https://www.ceptory.com/en/video-intelligence-api)
+- [Pricing](https://www.ceptory.com/pricing)
+- [GitHub Repository](https://github.com/whyashthakker/video-intelligence)

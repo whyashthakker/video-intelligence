@@ -18,7 +18,7 @@
 An open-source collection of **11 [Agent Skills](https://agentskills.io)** that teach AI agents how to work with video: watch recordings, search footage, run live camera rules, triage alerts, and write reports. The skills drive a video intelligence MCP server, so the agent gets real tools and the skills tell it how to use them well.
 
 Install these skills so your AI agent can:
-- **Actually watch & inspect video**: ingest recordings up to 2 GB, read chronological timelines, search visual scenes + speech + on-screen text, and zoom into exact frames.
+- **Actually watch & inspect video**: skim a whole recording as one storyboard image, zoom into the moments that matter and read exact frames with the model's own vision, with no indexing wait. Search scenes, speech and on-screen text when the video is long.
 - **Connect a video MCP server in 2 minutes**: OAuth 2.1 browser sign-in or a stdio local-file bridge.
 - **Configure 10 live camera workflows**: PPE, person down, fire & hazards, intrusion, face access, loitering, unattended bags, crowd limits, illegal parking, and rider helmets.
 - **Triage alerts & route notifications**: inspect annotated alert photos before resolving false alarms, and verify Slack, Teams, Discord, Email, and HMAC-signed webhooks.
@@ -63,7 +63,7 @@ Works with **Claude Code**, **Claude Desktop**, **Cursor**, **VS Code**, **Codex
 | # | Skill | Purpose | Docs |
 |---|---|---|---|
 | 1 | [`video-mcp-setup`](skills/video-mcp-setup/SKILL.md) | Connect Claude Code, Claude Desktop, Cursor, VS Code, Codex, Gemini CLI, Windsurf, or custom frameworks to the video MCP server over OAuth or a stdio bridge, verify balance/RBAC, and troubleshoot auth. | [ceptory.com/mcp](https://www.ceptory.com/mcp) |
-| 2 | [`watch-video`](skills/watch-video/SKILL.md) | Give any LLM vision over local or remote video files: upload/link video, read chronological visual+audio timelines (`get_video`), jump to moments (`search_videos`), ask grounded visual questions (`ask_video`), and inspect exact frames. | [ceptory.com](https://www.ceptory.com) |
+| 2 | [`watch-video`](skills/watch-video/SKILL.md) | Let any LLM watch video with its own vision: skim a storyboard of timestamped frames (`get_video_storyboard`), zoom in, and read exact frames (`get_video_frames`), with no indexing wait. Falls back to search (`search_videos`), the spoken timeline (`get_video`, `ask_video`) or local ffmpeg. | [ceptory.com](https://www.ceptory.com) |
 | 3 | [`video-search`](skills/video-search/SKILL.md) | Natural-language video indexing, multimodal search across scenes/speech/OCR, RAG Q&A, and programmatic REST API v1 pipelines (`/api/v1/indexes`). | [Video Search](https://www.ceptory.com/en/features/search) |
 | 4 | [`cctv-workflows`](skills/cctv-workflows/SKILL.md) | Translate plain-English monitoring requests into 10 live camera workflows (`ppe`, `fall`, `hazards`, `intrusion`, `unauthorized_access`, `loitering`, `abandoned_object`, `crowd`, `illegal_parking`, `traffic_helmet`), IANA schedules, and ROI zones. | [Live Monitoring](https://www.ceptory.com/en/features/monitor) |
 | 5 | [`alert-triage`](skills/alert-triage/SKILL.md) | Fleet health checks, paginated open-alert triage with visual verification (`get_alert_image`), and Slack, Teams, Discord, Email, and HMAC-SHA256 webhook routing. | [MCP Server](https://www.ceptory.com/mcp) |

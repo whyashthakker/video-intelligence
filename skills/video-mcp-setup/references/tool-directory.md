@@ -7,6 +7,7 @@ All tools execute through the dashboard route handlers with the approving user's
 | **Account** | `get_account` | Read | Returns user, workspace, plan, role, prepaid balance, usage, recent chats. |
 | **Video chats** | `list_chats`, `get_chat`, `list_videos`, `get_chat_videos`, `get_video` | Read | Poll `get_chat_videos` until `READY`. `get_video` returns indexed segment timeline. |
 | **Video ingest** | `create_chat`, `rename_chat`, `add_video_from_url`, `create_upload_url`, `complete_upload`, `retry_video` | Write | Indexing billed per minute (`retry_video` is free). Stdio `ceptory-mcp` adds `upload_video_file`. |
+| **Video watching** | `get_video_info`, `get_video_storyboard`, `get_video_frames` | Read | Free, about 40 calls a minute. Works as soon as the upload finishes, before indexing. Returns images for the agent's own vision. |
 | **Video query** | `search_videos`, `ask_video`, `analyze_video` | Write | Uses workspace prepaid balance (`402` if depleted). |
 | **Video delete** | `delete_chat`, `delete_video` | **Destructive** | Ask user before calling. |
 | **Cameras** | `list_camera_workflows`, `list_cameras`, `get_camera`, `get_camera_snapshot`, `geocode_address` | Read | Snapshot returns latest frame image + 10-min signed link. |

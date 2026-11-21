@@ -76,6 +76,19 @@ Works with **Claude Code**, **Claude Desktop**, **Cursor**, **VS Code**, **Codex
 
 ---
 
+## Skill Structure
+
+Every skill follows the [agentskills.io](https://agentskills.io) progressive-disclosure layout to keep agent context lean:
+
+```text
+skills/<skill-name>/
+├── SKILL.md           # Lean core workflow, guardrails & conditional triggers (< 50 lines)
+├── references/        # Deep API specs, schemas, RTSP brand tables, webhook verification code
+└── examples/          # Concrete transcripts, tool-call payloads, edge.toml & sample reports
+```
+
+---
+
 ## Manual Installation
 
 Copy any skill directory from `skills/` into your agent's skills folder (e.g. `.agents/skills/` or `.claude/skills/`):

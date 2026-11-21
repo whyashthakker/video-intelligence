@@ -1,0 +1,54 @@
+# Production example edge.toml for a 3-camera warehouse (Hikvision NVR + Dahua IP camera + synthetic test cam)
+# Validate before running: python3 -m ceptory_edge check --config edge.toml
+
+[ceptory]
+url = "https://www.ceptory.com"
+api_key = "${CEPTORY_API_KEY}"          # WRITE API key from Dashboard -> API keys
+gateway_name = "warehouse-pune-edge-1"
+heartbeat_seconds = 60
+
+[storage]
+data_dir = "/data"
+keep_uploaded_clips = false
+max_outbox_mb = 5120                    # buffers clips during internet outages
+
+[defaults]
+index_id = "idx_replace_with_your_id"   # copy from /dashboard/indexes/<index_id>
+upload_mode = "motion"                  # "motion" (cheapest) | "continuous" | "off"
+segment_seconds = 10
+pre_roll_segments = 1                   # 10s context before motion
+post_roll_segments = 1                  # 10s context after motion
+max_event_seconds = 60
+motion_sensitivity = 0.02               # 2% changed pixels triggers a clip
+pixel_threshold = 25
+sample_fps = 2
+transcode = false
+
+[[cameras]]
+id = "nvr-ch1-dock"
+name = "Loading Dock Bay 1"
+location = "Warehouse A"
+url = "rtsp://viewer:${NVR_PASS}@192.168.1.50:554/Streaming/Channels/102"
+# Mask top-left on-screen clock so ticking seconds do not trigger motion
+ignore_regions = [[0.0, 0.0, 0.42, 0.08]]
+
+[[cameras]]
+id = "nvr-ch2-aisle"
+name = "Forklift Aisle 2"
+location = "Warehouse A"
+url = "rtsp://viewer:${NVR_PASS}@192.168.1.50:554/Streaming/Channels/202"
+ignore_regions = [[0.0, 0.0, 0.42, 0.08]]
+
+[[cameras]]
+id = "gate-dahua-1"
+name = "Main Entry Gate"
+location = "Perimeter"
+url = "rtsp://viewer:${GATE_PASS}@192.168.1.64:554/cam/realmonitor?channel=1&subtype=1"
+motion_sensitivity = 0.015              # slightly more sensitive for distant vehicles
+ignore_regions = [[0.0, 0.0, 0.45, 0.08]]
+
+# Uncomment to verify end-to-end upload without a physical camera:
+# [[cameras]]
+# id = "test-cam"
+# name = "Synthetic Test Camera"
+# url = "test:pattern"

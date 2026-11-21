@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ceptory Video Intelligence Skills for AI Agents | ceptory.com</title>
+  <meta name="description" content="11 open-source Video Intelligence Agent Skills for Claude Code, Cursor, Codex, Gemini CLI, and VS Code — powered by Ceptory (ceptory.com). Let LLMs watch video, search footage, manage CCTV workflows, triage alerts, and run AI vision engines via MCP." />
+  <meta name="keywords" content="Ceptory, video intelligence, agent skills, MCP server, LLM watch video, Claude Code skills, Cursor skills, CCTV AI, RTSP, video search API" />
+  <link rel="canonical" href="https://www.ceptory.com/skills" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ceptory" />
+  <meta property="og:title" content="Ceptory Video Intelligence Skills for AI Agents" />
+  <meta property="og:description" content="Give Claude, Cursor, Codex, Gemini CLI & any AI agent eyes on video and live CCTV. 11 open-source MIT skills + live MCP server at ceptory.com." />
+  <meta property="og:url" content="https://whyashthakker.github.io/video-intelligence/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ceptory Video Intelligence Skills for AI Agents" />
+  <meta name="twitter:description" content="11 open-source skills so LLMs can watch video, search footage, run live camera workflows, triage alerts, and connect CCTV via Ceptory MCP." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "Ceptory Video Intelligence Agent Skills",
+    "description": "11 open-source Agent Skills for Ceptory (ceptory.com) giving AI agents video vision, natural-language video search, live CCTV camera workflows, alert triage, Re-ID movement tracking, AI vision engines, and structured reporting.",
+    "codeRepository": "https://github.com/whyashthakker/video-intelligence",
+    "license": "https://opensource.org/licenses/MIT",
+    "url": "https://www.ceptory.com/skills",
+    "author": {
+      "@type": "Organization",
+      "name": "Ceptory",
+      "url": "https://www.ceptory.com"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #f8f6f2;
+      --surface: #ffffff;
+      --surface-muted: #fbfaf7;
+      --surface-sunken: #f3f1ec;
+      --ink: #111113;
+      --ink-soft: rgba(17, 17, 19, 0.65);
+      --ink-faint: rgba(17, 17, 19, 0.45);
+      --accent: #d9485f;
+      --accent-hover: #c73d54;
+      --line: rgba(17, 17, 19, 0.08);
+      --line-strong: rgba(17, 17, 19, 0.16);
+      --sans: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .bg-glow {
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 52rem;
+      pointer-events: none;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(217, 72, 95, 0.14), transparent 70%),
+        radial-gradient(ellipse 40% 40% at 85% 10%, rgba(180, 83, 9, 0.08), transparent 70%);
+    }
+
+    .bg-grid {
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 40rem;
+      pointer-events: none;
+      z-index: -1;
+      background-image:
+        linear-gradient(to right, rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
+      background-size: 64px 64px;
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 30%, transparent 100%);
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 30%, transparent 100%);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: rgba(248, 246, 242, 0.82);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      background: var(--ink);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .brand-dot {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink-soft);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background 180ms ease, color 180ms ease;
+    }
+
+    .nav-links a:hover {
+      background: rgba(17, 17, 19, 0.04);
+      color: var(--ink);
+    }
+
+    .nav-cta {
+      background: var(--accent) !important;
+      color: #fff !important;
+      border-radius: 999px !important;
+      padding: 9px 18px !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-cta:hover {
+      background: var(--accent-hover) !important;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 72px 0 56px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--ink-faint);
+      margin: 0;
+    }
+
+    .eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    h1 {
+      margin: 18px 0 0;
+      max-width: 780px;
+      font-size: clamp(2.35rem, 5vw, 3.6rem);
+      font-weight: 600;
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+    }
+
+    .hero-sub {
+      margin: 20px 0 0;
+      max-width: 660px;
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+    }
+
+    .hero-sub a {
+      color: var(--ink);
+      font-weight: 600;
+      text-decoration-color: rgba(217, 72, 95, 0.45);
+      text-underline-offset: 4px;
+    }
+
+    .hero-sub a:hover { color: var(--accent); }
+
+    .cmd-box {
+      margin-top: 28px;
+      max-width: 580px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px 12px 18px;
+      border-radius: 14px;
+      border: 1px solid var(--line-strong);
+      background: var(--surface);
+      box-shadow: 0 12px 32px -20px rgba(15, 23, 42, 0.25);
+      font-family: var(--mono);
+      font-size: 13.5px;
+    }
+
+    .cmd-box code {
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+    }
+
+    .copy-btn {
+      flex-shrink: 0;
+      border: 1px solid var(--line-strong);
+      background: var(--surface-sunken);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 12px;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: border-color 150ms ease, background 150ms ease;
+    }
+
+    .copy-btn:hover {
+      border-color: var(--ink);
+      background: #fff;
+    }
+
+    .copy-btn.copied {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hero-actions {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 12px 24px -12px rgba(217, 72, 95, 0.7);
+    }
+    .btn-accent:hover { background: var(--accent-hover); }
+
+    .btn-dark {
+      background: var(--ink);
+      color: #fff;
+    }
+    .btn-dark:hover { background: #000; }
+
+    .btn-outline {
+      background: var(--surface);
+      color: var(--ink);
+      border: 1px solid var(--line-strong);
+    }
+    .btn-outline:hover { border-color: var(--ink); }
+
+    /* Stats strip */
+    .stats {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .stat {
+      background: var(--surface);
+      padding: 20px 22px;
+    }
+
+    .stat-k {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--ink-faint);
+      margin: 0;
+    }
+
+    .stat-v {
+      margin: 8px 0 0;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+    }
+
+    .stat-note {
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+
+    /* Sections */
+    .band {
+      padding: 68px 0;
+    }
+
+    .band-white {
+      background: var(--surface);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    h2 {
+      margin: 12px 0 0;
+      font-size: clamp(1.75rem, 3.2vw, 2.4rem);
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+    }
+
+    .section-desc {
+      margin: 12px 0 0;
+      max-width: 600px;
+      color: var(--ink-soft);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    /* Filters */
+    .filters {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-pill {
+      border: 1px solid var(--line-strong);
+      background: var(--surface);
+      color: var(--ink-soft);
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .filter-pill:hover { color: var(--ink); border-color: var(--ink); }
+    .filter-pill.active {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    /* Cards */
+    .grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: var(--line-strong);
+      box-shadow: 0 16px 36px -22px rgba(15, 23, 42, 0.25);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .card-cat {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .card-slug {
+      font-family: var(--mono);
+      font-size: 11px;
+      background: var(--surface-muted);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 3px 8px;
+      color: var(--ink-soft);
+    }
+
+    .card h3 {
+      margin: 12px 0 0;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .card p {
+      margin: 8px 0 0;
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+
+    .tags {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      background: var(--surface-sunken);
+      border: 1px solid rgba(17, 17, 19, 0.06);
+      border-radius: 6px;
+      padding: 3px 8px;
+      color: rgba(17, 17, 19, 0.72);
+    }
+
+    .card-cmd {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 10px 8px 12px;
+      background: var(--surface-sunken);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-family: var(--mono);
+      font-size: 11.5px;
+    }
+
+    .card-cmd code {
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+    }
+
+    .card-foot {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 13.5px;
+      font-weight: 500;
+    }
+
+    .card-foot a {
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .card-foot a:hover { color: var(--accent); }
+    .card-foot a.muted { color: var(--ink-soft); }
+    .card-foot a.muted:hover { color: var(--ink); }
+
+    /* MCP quickstart */
+    .mcp-grid {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .mcp-card {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .mcp-card h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .mcp-card p {
+      margin: 6px 0 12px;
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    .mcp-card pre {
+      margin: 0;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.55;
+      overflow-x: auto;
+    }
+
+    /* Dark CTA */
+    .cta-wrap { padding: 64px 0 80px; }
+
+    .cta {
+      position: relative;
+      overflow: hidden;
+      border-radius: 26px;
+      background: var(--ink);
+      color: #fff;
+      padding: 48px;
+      background-image:
+        radial-gradient(ellipse at 100% 0%, rgba(217, 72, 95, 0.36), transparent 55%),
+        radial-gradient(ellipse at 0% 100%, rgba(180, 83, 9, 0.2), transparent 50%);
+    }
+
+    .cta h2 { color: #fff; max-width: 600px; }
+    .cta p { color: rgba(255, 255, 255, 0.68); max-width: 560px; font-size: 16.5px; line-height: 1.65; margin-top: 14px; }
+
+    .cta-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn-ghost-dark {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .btn-ghost-dark:hover {
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      background: var(--surface-sunken);
+      padding: 32px 0;
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+
+    .foot-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .foot-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .foot-links a {
+      color: var(--ink-soft);
+      text-decoration: none;
+    }
+    .foot-links a:hover { color: var(--ink); }
+
+    @media (max-width: 860px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .grid, .mcp-grid { grid-template-columns: 1fr; }
+      .nav-hide-sm { display: none; }
+      .cta { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="https://www.ceptory.com" target="_blank" rel="noreferrer">
+        <span class="brand-mark">C<span class="brand-dot"></span></span>
+        <span>Ceptory</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#skills">11 Skills</a>
+        <a href="#mcp" class="nav-hide-sm">MCP Setup</a>
+        <a href="https://www.ceptory.com/pricing" target="_blank" rel="noreferrer" class="nav-hide-sm">Pricing</a>
+        <a href="https://github.com/whyashthakker/video-intelligence" target="_blank" rel="noreferrer" class="nav-hide-sm">GitHub</a>
+        <a href="https://www.ceptory.com/signup" target="_blank" rel="noreferrer" class="nav-cta">Try Ceptory Free →</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow"><span class="eyebrow-dot"></span>Open-Source Agent Skills · Powered by ceptory.com</p>
+        <h1>Give your AI agent eyes on video and live CCTV.</h1>
+        <p class="hero-sub">
+          Install <strong>11 MIT-licensed Agent Skills</strong> built for <a href="https://www.ceptory.com" target="_blank" rel="noreferrer">Ceptory</a>. Let Claude Code, Cursor, Codex, Gemini CLI, and VS Code watch video recordings, search footage in plain English, run 10 live camera workflows, triage alerts, and connect existing CCTV over RTSP.
+        </p>
+
+        <div class="cmd-box">
+          <code>npx skills add whyashthakker/video-intelligence</code>
+          <button class="copy-btn" data-copy="npx skills add whyashthakker/video-intelligence">Copy</button>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-accent" href="https://www.ceptory.com/signup" target="_blank" rel="noreferrer">Start Free on ceptory.com →</a>
+          <a class="btn btn-dark" href="https://www.ceptory.com/mcp" target="_blank" rel="noreferrer">Connect MCP Server</a>
+          <a class="btn btn-outline" href="https://www.ceptory.com/skills" target="_blank" rel="noreferrer">Official /skills Docs</a>
+          <a class="btn btn-outline" href="https://github.com/whyashthakker/video-intelligence" target="_blank" rel="noreferrer">View on GitHub</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <p class="stat-k">Agent Skills</p>
+            <p class="stat-v">11 Playbooks</p>
+            <p class="stat-note">Ready for Claude, Cursor, Codex &amp; Gemini</p>
+          </div>
+          <div class="stat">
+            <p class="stat-k">MCP Endpoint</p>
+            <p class="stat-v">OAuth 2.1</p>
+            <p class="stat-note">mcp.ceptory.com/mcp · 30+ live tools</p>
+          </div>
+          <div class="stat">
+            <p class="stat-k">Camera Workflows</p>
+            <p class="stat-v">10 Built-In</p>
+            <p class="stat-note">PPE, fire, intrusion, ANPR, faces &amp; more</p>
+          </div>
+          <div class="stat">
+            <p class="stat-k">Free Tier</p>
+            <p class="stat-v">No Camera Lock-In</p>
+            <p class="stat-note">Upload clips or connect existing RTSP/ONVIF</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="skills">
+      <div class="container">
+        <p class="eyebrow"><span class="eyebrow-dot"></span>Skill Catalog</p>
+        <h2>11 video intelligence skills, grounded in live Ceptory tools</h2>
+        <p class="section-desc">
+          Filter by capability, copy a single-skill install command, or open the full <code>SKILL.md</code> on GitHub.
+        </p>
+
+        <div class="filters" role="tablist" aria-label="Filter skills by category">
+          <button class="filter-pill active" data-filter="all">All (11)</button>
+          <button class="filter-pill" data-filter="Agent &amp; MCP">Agent &amp; MCP</button>
+          <button class="filter-pill" data-filter="Video Vision &amp; Reports">Video Vision &amp; Reports</button>
+          <button class="filter-pill" data-filter="Live Cameras &amp; Alerts">Live Cameras &amp; Alerts</button>
+          <button class="filter-pill" data-filter="Edge &amp; Vision API">Edge &amp; Vision API</button>
+        </div>
+
+        <div class="grid" id="skill-grid"></div>
+      </div>
+    </section>
+
+    <section class="band band-white" id="mcp">
+      <div class="container">
+        <p class="eyebrow"><span class="eyebrow-dot"></span>Live MCP Server</p>
+        <h2>Connect Ceptory MCP in under two minutes</h2>
+        <p class="section-desc">
+          Pair these skills with Ceptory's hosted Streamable HTTP MCP server (<code>https://mcp.ceptory.com/mcp</code>) or local-file stdio bridge (<code>npx -y ceptory-mcp</code>). See full client instructions at <a href="https://www.ceptory.com/mcp" target="_blank" rel="noreferrer" style="color:var(--accent);font-weight:600;">ceptory.com/mcp</a>.
+        </p>
+
+        <div class="mcp-grid">
+          <div class="mcp-card">
+            <h3>Claude Code</h3>
+            <p>Run in your terminal, then type <code>/mcp</code> and approve in your browser on ceptory.com.</p>
+            <pre>claude mcp add --transport http ceptory https://mcp.ceptory.com/mcp</pre>
+          </div>
+          <div class="mcp-card">
+            <h3>Cursor (<code>~/.cursor/mcp.json</code>)</h3>
+            <p>Add the server URL — Cursor handles OAuth 2.1 browser sign-in automatically.</p>
+            <pre>{
+  "mcpServers": {
+    "ceptory": { "url": "https://mcp.ceptory.com/mcp" }
+  }
+}</pre>
+          </div>
+          <div class="mcp-card">
+            <h3>VS Code (<code>.vscode/mcp.json</code>)</h3>
+            <p>Works directly in GitHub Copilot agent mode with OAuth discovery.</p>
+            <pre>{
+  "servers": {
+    "ceptory": { "type": "http", "url": "https://mcp.ceptory.com/mcp" }
+  }
+}</pre>
+          </div>
+          <div class="mcp-card">
+            <h3>Claude Desktop / Local Video Uploads</h3>
+            <p>Use the stdio bridge to unlock one-step <code>upload_video_file</code> and <code>image_path</code>.</p>
+            <pre>CEPTORY_TOKEN=&lt;token&gt; npx -y ceptory-mcp</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-wrap">
+      <div class="container">
+        <div class="cta">
+          <p class="eyebrow" style="color:rgba(255,255,255,0.65);"><span class="eyebrow-dot"></span>Give your cameras &amp; agents a brain</p>
+          <h2>Start searching video and automating CCTV on ceptory.com</h2>
+          <p>
+            Create a free workspace on Ceptory, connect your MCP agent in two minutes, and put all 11 video intelligence skills to work on real footage and live cameras.
+          </p>
+          <div class="cta-actions">
+            <a class="btn btn-accent" href="https://www.ceptory.com/signup" target="_blank" rel="noreferrer">Create Free Account →</a>
+            <a class="btn btn-ghost-dark" href="https://www.ceptory.com/demo" target="_blank" rel="noreferrer">Book Enterprise Demo</a>
+            <a class="btn btn-ghost-dark" href="https://www.ceptory.com/en/video-intelligence-api" target="_blank" rel="noreferrer">Explore REST API</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container foot-inner">
+      <div>© 2026 <a href="https://www.ceptory.com" target="_blank" rel="noreferrer" style="color:var(--ink);font-weight:600;text-decoration:none;">Ceptory</a> · Open-source MIT Agent Skills</div>
+      <div class="foot-links">
+        <a href="https://www.ceptory.com" target="_blank" rel="noreferrer">ceptory.com</a>
+        <a href="https://www.ceptory.com/skills" target="_blank" rel="noreferrer">/skills</a>
+        <a href="https://www.ceptory.com/mcp" target="_blank" rel="noreferrer">/mcp</a>
+        <a href="https://www.ceptory.com/pricing" target="_blank" rel="noreferrer">/pricing</a>
+        <a href="https://www.ceptory.com/llms.txt" target="_blank" rel="noreferrer">/llms.txt</a>
+        <a href="https://github.com/whyashthakker/video-intelligence" target="_blank" rel="noreferrer">GitHub Repo</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const REPO = "https://github.com/whyashthakker/video-intelligence";
+    const SKILLS = [
+      {
+        slug: "ceptory-mcp-setup",
+        cat: "Agent & MCP",
+        title: "MCP Server & Agent Setup",
+        desc: "Connect Claude Code, Claude Desktop, Cursor, VS Code, Codex, Gemini CLI, Windsurf, OpenAI Agents SDK, LangChain, or n8n to Ceptory MCP with OAuth 2.1 or Bearer tokens.",
+        tags: ["mcp.ceptory.com/mcp", "npx -y ceptory-mcp", "get_account"],
+        docs: { label: "ceptory.com/mcp", href: "https://www.ceptory.com/mcp" }
+      },
+      {
+        slug: "ceptory-llm-video-vision",
+        cat: "Video Vision & Reports",
+        title: "LLM Video Vision (Watch Video)",
+        desc: "Let any LLM watch local or remote videos: ingest recordings, inspect chronological visual+audio timelines, jump to exact moments, ask visual questions, and zoom into key frames.",
+        tags: ["get_video", "search_videos", "ask_video", "ffmpeg + run_engine"],
+        docs: { label: "ceptory.com", href: "https://www.ceptory.com" }
+      },
+      {
+        slug: "ceptory-video-search",
+        cat: "Video Vision & Reports",
+        title: "Natural-Language Video Search & API",
+        desc: "Index recorded videos up to 2 GB via URL or presigned upload, search scenes, speech, and on-screen text in plain English, and automate via REST API v1.",
+        tags: ["add_video_from_url", "search_videos", "/api/v1/indexes"],
+        docs: { label: "Video Search", href: "https://www.ceptory.com/en/features/search" }
+      },
+      {
+        slug: "ceptory-camera-workflows",
+        cat: "Live Cameras & Alerts",
+        title: "10 Live Camera Monitoring Workflows",
+        desc: "Turn plain-English rules into Ceptory's 10 camera workflows (PPE, person down, fire/smoke, intrusion, face access, loitering, unattended bags, crowd, parking, rider helmets).",
+        tags: ["list_camera_workflows", "create_camera", "IANA schedules", "ROI zones"],
+        docs: { label: "Live Monitoring", href: "https://www.ceptory.com/en/features/monitor" }
+      },
+      {
+        slug: "ceptory-alert-triage",
+        cat: "Live Cameras & Alerts",
+        title: "Alert Triage & Notification Channels",
+        desc: "Check fleet health, visually verify annotated alert photos before resolving false alarms, and configure Slack, Teams, Discord, Email, and HMAC-SHA256 webhooks.",
+        tags: ["list_alerts", "get_alert_image", "X-Ceptory-Signature"],
+        docs: { label: "MCP Tools", href: "https://www.ceptory.com/mcp#tools" }
+      },
+      {
+        slug: "ceptory-access-and-plates",
+        cat: "Live Cameras & Alerts",
+        title: "Face Access & ANPR Plate Lists",
+        desc: "Manage staff, watchlist, and custom allow/alert people lists on unauthorized_access cameras, plus read number plates from photos and manage Authorized/Banned parking lists.",
+        tags: ["add_camera_person", "read_plates", "update_plate_list"],
+        docs: { label: "Detection", href: "https://www.ceptory.com/en/features/detect" }
+      },
+      {
+        slug: "ceptory-cross-camera-tracking",
+        cat: "Live Cameras & Alerts",
+        title: "Cross-Camera Re-ID & GPS Triangulation",
+        desc: "Group cameras by site, trace person and vehicle journeys across cameras with sighting thumbnails, geocode addresses, and triangulate overlapping alerts on the map.",
+        tags: ["create_camera_group", "get_movement", "geocode_address"],
+        docs: { label: "Tracking", href: "https://www.ceptory.com/en/features/track" }
+      },
+      {
+        slug: "ceptory-ai-engines",
+        cat: "Edge & Vision API",
+        title: "Direct AI Detection Engines API",
+        desc: "Discover and invoke Ceptory's computer-vision detection engines on still frames or stateful multi-frame tracking loops with optional annotated JPEG outputs.",
+        tags: ["list_engines", "run_engine", "/api/v1/engines/{id}"],
+        docs: { label: "REST API", href: "https://www.ceptory.com/en/video-intelligence-api" }
+      },
+      {
+        slug: "ceptory-edge-cctv-setup",
+        cat: "Edge & Vision API",
+        title: "Ceptory Edge & RTSP/ONVIF CCTV Setup",
+        desc: "Connect existing IP cameras, NVRs, DVRs, and analog CCTV over outbound HTTPS with motion gating and RTSP sub-stream templates for 15+ camera brands.",
+        tags: ["edge.toml", "Hikvision / Dahua / Axis", "/api/v1/edge"],
+        docs: { label: "Connect CCTV", href: "https://www.ceptory.com/en/integrations/cameras" }
+      },
+      {
+        slug: "ceptory-incident-and-ops-reports",
+        cat: "Video Vision & Reports",
+        title: "Incident, Safety & Ops Reports",
+        desc: "Draft timestamped Security Incident Reports, Daily CCTV Reviews, EHS Safety/PPE audits, Warehouse Shift Handovers, and Construction Daily Reports from indexed video.",
+        tags: ["Security incident", "PPE audit", "Shift handover", "Drone logs"],
+        docs: { label: "Report Guides", href: "https://www.ceptory.com/guides" }
+      },
+      {
+        slug: "ceptory-media-logging",
+        cat: "Video Vision & Reports",
+        title: "Media Shot Logging & Highlight Cuts",
+        desc: "Produce HH:MM:SS timecoded shot logs, verbatim spoken pull quotes, ranked top moments, 60-second highlight cut orders, and consistent media archive tags.",
+        tags: ["HH:MM:SS shot log", "Pull quotes", "60s cut order"],
+        docs: { label: "Logging Guide", href: "https://www.ceptory.com/guides/log-video-footage-with-ai" }
+      }
+    ];
+
+    const grid = document.getElementById("skill-grid");
+
+    function render(filter) {
+      const list = filter === "all" ? SKILLS : SKILLS.filter(s => s.cat === filter);
+      grid.innerHTML = list.map((s) => {
+        const idx = String(SKILLS.indexOf(s) + 1).padStart(2, "0");
+        const cmd = `npx skills add whyashthakker/video-intelligence --skill ${s.slug}`;
+        const ghUrl = `${REPO}/blob/main/skills/${s.slug}/SKILL.md`;
+        return `
+          <article class="card">
+            <div class="card-top">
+              <span class="card-cat">${idx} · ${s.cat}</span>
+              <span class="card-slug">${s.slug}</span>
+            </div>
+            <h3>${s.title}</h3>
+            <p>${s.desc}</p>
+            <div class="tags">${s.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
+            <div class="card-cmd">
+              <code>${cmd}</code>
+              <button class="copy-btn" data-copy="${cmd}">Copy</button>
+            </div>
+            <div class="card-foot">
+              <a href="${ghUrl}" target="_blank" rel="noreferrer">Read SKILL.md ↗</a>
+              <a class="muted" href="${s.docs.href}" target="_blank" rel="noreferrer">${s.docs.label} ↗</a>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest(".copy-btn");
+      if (btn) {
+        const text = btn.getAttribute("data-copy");
+        if (navigator.clipboard && text) {
+          navigator.clipboard.writeText(text).then(() => {
+            btn.textContent = "Copied";
+            btn.classList.add("copied");
+            setTimeout(() => {
+              btn.textContent = "Copy";
+              btn.classList.remove("copied");
+            }, 1600);
+          });
+        }
+      }
+      const pill = e.target.closest(".filter-pill");
+      if (pill) {
+        document.querySelectorAll(".filter-pill").forEach(p => p.classList.remove("active"));
+        pill.classList.add("active");
+        render(pill.getAttribute("data-filter"));
+      }
+    });
+
+    render("all");
+  </script>
+</body>
+</html>

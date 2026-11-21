@@ -1,9 +1,9 @@
 ---
-name: ceptory-incident-and-ops-reports
-description: Generate structured, evidence-backed operational reports from indexed CCTV, workplace, dock, and drone video footage in Ceptory: Security Incident Reports, Daily CCTV Reviews, Workplace Safety / PPE Observation Reports, Warehouse End-of-Shift Handover Reports, and Construction Daily Reports. Use whenever a user asks to write an incident report, daily security review, safety/PPE audit report, warehouse shift handover, or construction progress log from video footage in Ceptory.
+name: video-incident-reports
+description: Generate structured, evidence-backed operational reports from indexed CCTV, workplace, dock, and drone video: Security Incident Reports, Daily CCTV Reviews, Workplace Safety / PPE Observation Reports, Warehouse End-of-Shift Handovers, and Construction Daily Reports via Ceptory. Use whenever a user asks to write an incident report, daily security review, safety/PPE audit, warehouse handover, or construction log from video footage.
 ---
 
-# Ceptory Structured Security, Safety & Operations Reports
+# Structured Security, Safety & Operations Reports From Video
 
 Convert indexed CCTV, warehouse, plant, or drone footage into standardized, review-ready operational reports using Ceptory's search + analyze pipeline.
 

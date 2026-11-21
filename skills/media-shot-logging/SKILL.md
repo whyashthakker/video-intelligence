@@ -1,9 +1,9 @@
 ---
-name: ceptory-media-logging
-description: Build timecoded shot logs, extract verbatim spoken pull quotes, rank top highlight moments, generate 60-second highlight edit cut orders, and tag media archives from long recordings (matches, events, interviews, webinars, newsrooms) using Ceptory video search and multimodal analysis. Use whenever a user wants to log raw footage without scrubbing, find spoken quotes or reactions in video archives, or produce an edit decision / highlight sheet from Ceptory.
+name: media-shot-logging
+description: Build HH:MM:SS timecoded shot logs, extract verbatim spoken pull quotes, rank top highlight moments, generate 60-second edit cut orders, and standardize archive tags from long recordings (events, matches, interviews, webinars) using Ceptory video search and analysis. Use whenever a user wants to log raw footage without scrubbing, find spoken quotes or crowd reactions, or produce an edit decision sheet.
 ---
 
-# Ceptory Media Shot Logging, Highlight Extraction & Archive Search
+# Media Shot Logging, Highlight Extraction & Archive Search
 
 Turn long unedited recordings—events, sports matches, interviews, product demos, webinars, and broadcast archives—into timecoded shot logs, verbatim pull quotes, and ready-to-cut highlight plans without manual scrubbing.
 

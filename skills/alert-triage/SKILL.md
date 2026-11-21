@@ -1,9 +1,9 @@
 ---
-name: ceptory-alert-triage
-description: Triage live camera alerts in Ceptory by checking camera health (online/offline/error), paginating open alerts, visually inspecting annotated evidence images before resolving false alarms, and configuring or verifying workspace notification channels (Slack, Microsoft Teams, Discord, Email, and HMAC-signed custom webhooks). Use whenever a user asks to review open alerts, run a shift check on camera health, resolve false alarms, or integrate Ceptory alerts into Slack, Teams, Discord, email, or an incident webhook receiver.
+name: alert-triage
+description: Triage live security and safety camera alerts by checking fleet health (online/offline/error), paginating open alerts, visually inspecting annotated evidence images before resolving false alarms, and configuring or verifying Slack, Microsoft Teams, Discord, Email, and HMAC-SHA256 webhook channels via Ceptory. Use whenever a user asks to review open alerts, run a shift check on camera health, clear false alarms, or verify alert webhook signatures.
 ---
 
-# Ceptory Alert Triage & Notification Routing
+# Security & Safety Alert Triage & Notification Routing
 
 Run systematic security/ops alert triage with visual verification and configure reliable multi-channel alert delivery.
 

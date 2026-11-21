@@ -1,9 +1,9 @@
 ---
-name: ceptory-cross-camera-tracking
-description: Group Ceptory cameras by physical site or area, enable cross-camera person and vehicle re-identification (Re-ID) journeys, inspect sighting thumbnails, geocode site addresses, and configure camera coordinates, compass headings, and field-of-view (FOV) for automatic multi-camera event triangulation on the map. Use whenever a user wants to organize cameras into sites, trace where a person or vehicle went across cameras, follow a license plate across a campus, or pinpoint alert locations on a map.
+name: cross-camera-tracking
+description: Group cameras by physical site or area, trace cross-camera person and vehicle re-identification (Re-ID) journeys with sighting thumbnails, geocode site addresses, and configure coordinates, compass headings, and field-of-view (FOV) for automatic multi-camera GPS event triangulation via Ceptory MCP. Use whenever a user wants to organize cameras into sites, trace where a person or vehicle went across cameras, follow a license plate, or pinpoint alerts on a map.
 ---
 
-# Ceptory Cross-Camera Tracking & Multi-Camera Geo-Triangulation
+# Cross-Camera Re-ID Tracking & Multi-Camera Geo-Triangulation
 
 Turn isolated camera alerts into site-wide person/vehicle journeys and map-pinpointed events.
 

@@ -1,9 +1,9 @@
 ---
-name: ceptory-ai-engines
-description: Discover and invoke Ceptory's AI detection engines catalog (PPE, fire/smoke, license plates, faces, crowd counting, vehicles, and more) on individual images or sequential video frames via MCP (list_engines, run_engine) or REST API (/api/v1/engines), including stateful multi-frame tracking loops, ROI zone filtering, and annotated JPEG output. Use whenever a user wants to run a specific computer-vision detector on an image, test frame-by-frame detections in a script, or build a custom detection pipeline on Ceptory's Engines API.
+name: vision-engines
+description: Discover and run computer-vision detection engines (PPE, fire/smoke, license plates, faces, crowd counting, vehicles, and more) on single images or stateful multi-frame tracking loops with ROI zone filtering and annotated JPEG output via Ceptory MCP or /api/v1/engines. Use whenever a user wants to run a detector on a still image, process video frames in a script, or build a custom vision pipeline.
 ---
 
-# Ceptory Direct AI Detection Engines API
+# Computer-Vision Detection Engines API (Stateless & Stateful)
 
 Run individual Ceptory computer-vision detection engines directly on still images or sequential frames—without setting up a full live camera workflow.
 

@@ -1,9 +1,9 @@
 ---
-name: ceptory-camera-workflows
-description: Configure and manage Ceptory's 10 live camera monitoring workflows (ppe, fall, hazards, intrusion, unauthorized_access, loitering, abandoned_object, crowd, illegal_parking, traffic_helmet), including schedules with IANA timezones, ROI zones, alert responses (clip recording, mobile push, desk alarm), Discord webhooks, and test-frame validation. Use whenever a user asks to set up a camera rule, translate plain English monitoring requirements into Ceptory camera settings, pause/resume cameras, or tune false alarms.
+name: cctv-workflows
+description: Translate plain-English monitoring requirements into live CCTV camera workflows (PPE checks, person down, fire and smoke hazards, intrusion, face access, loitering, unattended bags, crowd limits, illegal parking, and rider helmets), including IANA timezone schedules, normalized ROI zones, clip recording, and alert tuning via Ceptory MCP. Use whenever a user asks to set up a camera rule, configure CCTV detections, pause or resume cameras, or reduce false alarms.
 ---
 
-# Ceptory Live Camera Workflows & Configuration
+# Live CCTV Monitoring Workflows & Rules
 
 Turn plain-language monitoring requirements into exact Ceptory camera configurations using the 10 built-in workflows.
 

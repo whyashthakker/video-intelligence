@@ -1,9 +1,9 @@
 ---
-name: ceptory-llm-video-vision
-description: Give any LLM or coding/operations agent vision over video files and URLs using Ceptory (ceptory.com). Upload or link a video (screen recording, CCTV clip, drone flight, product demo, interview, or bug repro), read its full visual + audio timeline, search for exact moments in plain English, ask grounded questions about what happens on screen, and optionally zoom into individual frames with ffmpeg or Ceptory AI detection engines. Use whenever a user asks an LLM to watch a video, look at a video, explain what happens in a recording, debug a screen recording, or inspect footage.
+name: watch-video
+description: Give any LLM or AI agent vision over local or remote video files (MP4, MOV, WebM). Upload or link a screen recording, bug repro, CCTV clip, drone flight, or product demo, read its chronological visual and audio timeline, search for exact moments in plain English, ask grounded visual questions, and zoom into individual frames with ffmpeg or vision detectors via Ceptory MCP. Use whenever a user asks an agent to watch a video, look at a video, debug a screen recording, or explain what happens in footage.
 ---
 
-# Give LLMs Vision Over Video (Ceptory Video Understanding)
+# Watch & Inspect Video With Any LLM
 
 Most LLMs cannot natively watch long video files without blowing through context limits or missing transient visual and spoken details. This skill gives any MCP-connected LLM a fast, accurate, token-efficient protocol to "watch" and reason over any video using [Ceptory](https://www.ceptory.com).
 

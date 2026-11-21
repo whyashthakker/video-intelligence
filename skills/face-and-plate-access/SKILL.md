@@ -1,9 +1,9 @@
 ---
-name: ceptory-access-and-plates
-description: Manage face access control lists (staff, watchlist, custom allow/alert lists) on Ceptory unauthorized_access cameras and ANPR license plate lists (Authorized, Residents, Banned, instant critical alerts, and photo plate reading) on illegal_parking cameras. Use whenever a user wants to enroll or remove authorized staff or watchlisted individuals, tune face match strictness, extract number plates from photos, or configure allowed and banned vehicle plate lists.
+name: face-and-plate-access
+description: Manage face access control lists (staff, watchlist, custom allow/alert lists) and ANPR license plate lists (Authorized, Residents, Banned, instant critical alerts, and reading plates from photos) on live cameras via Ceptory MCP. Use whenever a user wants to enroll or remove authorized people or watchlists, tune face match strictness, read number plates from an image, or configure allowed and banned parking plate lists.
 ---
 
-# Ceptory Face Access Control & License Plate (ANPR) Enforcement
+# Face Access Control & License Plate (ANPR) Enforcement
 
 Operate Ceptory's identity-based (`unauthorized_access`) and vehicle-plate-based (`illegal_parking`) camera rules accurately and safely.
 

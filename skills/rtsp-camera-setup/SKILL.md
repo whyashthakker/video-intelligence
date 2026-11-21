@@ -1,9 +1,9 @@
 ---
-name: ceptory-edge-cctv-setup
-description: Connect existing on-premises IP cameras, NVRs, DVRs, and analog CCTV systems to Ceptory using Ceptory Edge (outbound HTTPS only, no port forwarding, local RTSP credentials, local motion gating) and the Edge REST API (/api/v1/edge). Includes brand-specific H.264 sub-stream RTSP URL templates for Hikvision, Dahua, CP Plus, Axis, Reolink, Uniview, UniFi Protect, EZVIZ, TP-Link Tapo/VIGI, Hanwha, Bosch, i-PRO, Vivotek, Foscam, XMEye, and ONVIF discovery. Use whenever a user wants to connect CCTV cameras or an NVR/DVR to Ceptory, generate edge.toml, troubleshoot RTSP/ONVIF streams, or integrate custom edge hardware.
+name: rtsp-camera-setup
+description: Connect existing on-premises IP cameras, NVRs, DVRs, and analog CCTV to cloud video search over outbound HTTPS (no port forwarding, local credentials, local motion gating) using Ceptory Edge. Includes H.264 sub-stream RTSP URL templates for 15+ brands (Hikvision, Dahua, CP Plus, Axis, Reolink, Uniview, UniFi Protect, EZVIZ, Tapo, Hanwha, Bosch, ONVIF) and edge.toml generation. Use whenever a user wants to connect CCTV or an NVR/DVR, find RTSP URLs, or troubleshoot ONVIF streams.
 ---
 
-# Ceptory Edge & RTSP/ONVIF CCTV Integration
+# On-Prem RTSP & ONVIF CCTV Camera Integration
 
 Connect existing LAN cameras, NVRs, and DVRs to Ceptory without replacing hardware, opening firewall ports, or exposing camera passwords to the internet.
 

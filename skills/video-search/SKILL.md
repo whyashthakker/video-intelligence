@@ -1,9 +1,9 @@
 ---
-name: ceptory-video-search
-description: Index recorded videos (from public HTTPS URLs or local files up to 2 GB), search footage in natural language across visual scenes, speech, and on-screen text, ask grounded questions about videos, and run multimodal analysis via Ceptory MCP tools or REST API v1 (/api/v1/indexes). Use whenever a user wants to upload, index, semantically search, query, or summarize recorded video footage in Ceptory.
+name: video-search
+description: Index recorded videos from HTTPS URLs or local uploads (up to 2 GB), search across visual scenes, spoken audio, and on-screen text in natural language, run grounded video Q&A, and automate video indexing pipelines via Ceptory MCP or REST API (/api/v1/indexes). Use whenever a user wants to upload, index, semantically search, query, or summarize recorded video footage.
 ---
 
-# Ceptory Natural-Language Video Search & Q&A
+# Natural-Language Video Search & Q&A
 
 Index recorded video footage into Ceptory and retrieve exact timestamped moments using natural language, visual + audio RAG Q&A, and structured multimodal analysis.
 

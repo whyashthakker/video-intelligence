@@ -1,6 +1,6 @@
 ---
 name: media-shot-logging
-description: Build HH:MM:SS timecoded shot logs, extract verbatim spoken pull quotes, rank top highlight moments, generate 60-second edit cut orders, and standardize archive tags from long recordings (events, matches, interviews, webinars) using Ceptory video search and analysis. Use whenever a user wants to log raw footage without scrubbing, find spoken quotes or crowd reactions, or produce an edit decision sheet.
+description: Build HH:MM:SS timecoded shot logs, extract verbatim spoken pull quotes, rank top highlight moments, generate 60-second edit cut orders, and standardize archive tags from long recordings (events, matches, interviews, webinars) using MCP video search and analysis. Use whenever a user wants to log raw footage without scrubbing, find spoken quotes or crowd reactions, or produce an edit decision sheet.
 ---
 
 # Media Shot Logging, Highlight Extraction & Archive Search
@@ -11,7 +11,7 @@ Turn long unedited recordings—events, sports matches, interviews, product demo
 
 1. **Upload full recordings, not pre-cuts**: Keep the full program feed (and separate isolated cameras if available) in one dedicated chat/index per production or series so moments aren't lost before search.
 2. **File sizing**: Each upload supports up to **2 GB** (up to ~1 hour per recording recommended; split longer multi-hour events into numbered parts like `keynote-part1.mp4`, `keynote-part2.mp4` inside the same index so they remain searchable together).
-3. **Preserve clean audio**: Ceptory indexes speech alongside visual frames and on-screen text—clean audio makes verbatim quote retrieval dramatically more accurate.
+3. **Preserve clean audio**: The index covers speech alongside visual frames and on-screen text—clean audio makes verbatim quote retrieval dramatically more accurate.
 4. **Poll until `READY`**: Use `get_chat_videos` (MCP) or `GET /api/v1/indexes/{indexId}/videos/{videoId}` (REST) before searching or logging.
 
 ## High-Recall Media Search Patterns (`search_videos`)
@@ -44,6 +44,6 @@ When an event spans multiple uploaded recordings in the same chat/index:
 
 ## Guardrails & Accurate Capabilities
 
-- **Ceptory logs and plays back moments; it does not render/export edited video timelines.** Deliver clean `HH:MM:SS` timecodes and cut orders that an editor (or downstream `ffmpeg` / NLE script) can cut directly.
+- **The video tools log and play back moments; they do not render/export edited video timelines.** Deliver clean `HH:MM:SS` timecodes and cut orders that an editor (or downstream `ffmpeg` / NLE script) can cut directly.
 - **No fabricated names or quotes**: Only attribute a speaker by name if their name is spoken or visibly displayed on screen; otherwise label by role (`Host`, `Speaker 1`, `Panelist`).
 - **Consistent archive taxonomy**: Reuse a controlled vocabulary of topic and setting tags across uploads in the same index so future archive searches remain consistent.

@@ -1,6 +1,6 @@
 ---
 name: cross-camera-tracking
-description: Group cameras by physical site or area, trace cross-camera person and vehicle re-identification (Re-ID) journeys with sighting thumbnails, geocode site addresses, and configure coordinates, compass headings, and field-of-view (FOV) for automatic multi-camera GPS event triangulation via Ceptory MCP. Use whenever a user wants to organize cameras into sites, trace where a person or vehicle went across cameras, follow a license plate, or pinpoint alerts on a map.
+description: Group cameras by physical site or area, trace cross-camera person and vehicle re-identification (Re-ID) journeys with sighting thumbnails, geocode site addresses, and configure coordinates, compass headings, and field-of-view (FOV) for automatic multi-camera GPS event triangulation via MCP. Use whenever a user wants to organize cameras into sites, trace where a person or vehicle went across cameras, follow a license plate, or pinpoint alerts on a map.
 ---
 
 # Cross-Camera Re-ID Tracking & Multi-Camera Geo-Triangulation
@@ -46,14 +46,14 @@ Each journey contains ordered `stops` (`sightingId`, `cameraId`, `cameraName`, `
 - Call `get_sighting_image({ sighting_id })` to retrieve the cropped thumbnail for any stop and visually verify continuity before escalating an investigation.
 
 ### How Re-ID Matching Works & How to Communicate It
-- Ceptory combines visual appearance embeddings (`0.75` CLIP similarity) and color histograms (`0.25`), upgraded when a readable license plate (`>= 0.99` on exact / edit-distance 1 match) or clear face embedding (`>= 0.95` when cosine `>= 0.5`) is present on both sightings.
+- The tracker combines visual appearance embeddings (`0.75` CLIP similarity) and color histograms (`0.25`), upgraded when a readable license plate (`>= 0.99` on exact / edit-distance 1 match) or clear face embedding (`>= 0.95` when cosine `>= 0.5`) is present on both sightings.
 - Cross-camera thresholds: `0.78` for people, `0.84` for vehicles.
 - **Accuracy rule**: Always describe appearance-based cross-camera links as **"likely"** matches (e.g., *"Likely same person: Main Gate 10:12 → Lobby 10:14 → Parking B 10:18 (86% match)"*), unless confirmed by a visually verified sighting photo or exact license plate read.
 - **Troubleshooting empty results**: If `get_movement` returns no multi-camera journeys, verify via `list_cameras` that at least two cameras in the group have `track_people: true` and are `online`.
 
 ## Part 3: Map Placement & Multi-Camera Event Triangulation
 
-When two or more cameras report the same kind of alert (and same hazard type for `hazards`) within a **3-minute window**, Ceptory intersects their sight lines to compute an estimated GPS location (`{ lat, lng, accuracyM, method: "triangulated", cameras }`) up to **3,000 meters** from the cameras.
+When two or more cameras report the same kind of alert (and same hazard type for `hazards`) within a **3-minute window**, the platform intersects their sight lines to compute an estimated GPS location (`{ lat, lng, accuracyM, method: "triangulated", cameras }`) up to **3,000 meters** from the cameras.
 
 ### Setup Steps
 1. **Geocode the site address**:

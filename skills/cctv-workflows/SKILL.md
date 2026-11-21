@@ -1,11 +1,11 @@
 ---
 name: cctv-workflows
-description: Translate plain-English monitoring requirements into live CCTV camera workflows (PPE checks, person down, fire and smoke hazards, intrusion, face access, loitering, unattended bags, crowd limits, illegal parking, and rider helmets), including IANA timezone schedules, normalized ROI zones, clip recording, and alert tuning via Ceptory MCP. Use whenever a user asks to set up a camera rule, configure CCTV detections, pause or resume cameras, or reduce false alarms.
+description: Translate plain-English monitoring requirements into live CCTV camera workflows (PPE checks, person down, fire and smoke hazards, intrusion, face access, loitering, unattended bags, crowd limits, illegal parking, and rider helmets), including IANA timezone schedules, normalized ROI zones, clip recording, and alert tuning via MCP. Use whenever a user asks to set up a camera rule, configure CCTV detections, pause or resume cameras, or reduce false alarms.
 ---
 
 # Live CCTV Monitoring Workflows & Rules
 
-Turn plain-language monitoring requirements into exact Ceptory camera configurations using the 10 built-in workflows.
+Turn plain-language monitoring requirements into exact camera configurations using the 10 built-in workflows.
 
 ## Standard Setup Procedure
 
@@ -63,8 +63,8 @@ Controls what happens when an alert fires (in addition to storing the alert and 
 }
 ```
 - `clipSec`: `0` (photo only), `10`, `20`, or `30` seconds recorded around the alert (half pre-roll, half post-roll).
-- `push`: Send Ceptory Mobile push notifications to the workspace.
-- `alarm`: Sound an audible alarm on computers displaying Ceptory's monitoring desk.
+- `push`: Send mobile app push notifications to the workspace.
+- `alarm`: Sound an audible alarm on computers displaying the monitoring desk.
 
 ### Normalized ROI Zone (`zone`)
 Fractions of the frame (`0`–`1`):
@@ -84,6 +84,6 @@ Fractions of the frame (`0`–`1`):
 
 ## Operational Tips
 
-- **Where live frames come from**: After `create_camera`, tell the user to attach the camera stream in **Ceptory Desktop** or the browser dashboard ("Use this computer"), or feed frames programmatically via `send_camera_frame`.
+- **Where live frames come from**: After `create_camera`, tell the user to attach the camera stream in the **desktop app** or the browser dashboard ("Use this computer"), or feed frames programmatically via `send_camera_frame`.
 - **Reducing alert fatigue**: Tighten the `zone` to exclude public sidewalks/roads, raise `cooldownMin`, add an after-hours `schedule`, or tune `sensitivity` (`"low"` on `hazards`) / `minutes` (`loitering`, `abandoned_object`) / `graceMin` (`illegal_parking`).
 - **Destructive check**: Always confirm with the user before calling `delete_camera`, which permanently removes the camera, its alerts, and enrolled people.

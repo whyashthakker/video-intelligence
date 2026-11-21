@@ -1,6 +1,6 @@
 ---
 name: alert-triage
-description: Triage live security and safety camera alerts by checking fleet health (online/offline/error), paginating open alerts, visually inspecting annotated evidence images before resolving false alarms, and configuring or verifying Slack, Microsoft Teams, Discord, Email, and HMAC-SHA256 webhook channels via Ceptory. Use whenever a user asks to review open alerts, run a shift check on camera health, clear false alarms, or verify alert webhook signatures.
+description: Triage live security and safety camera alerts by checking fleet health (online/offline/error), paginating open alerts, visually inspecting annotated evidence images before resolving false alarms, and configuring or verifying Slack, Microsoft Teams, Discord, Email, and HMAC-SHA256 webhook channels via MCP. Use whenever a user asks to review open alerts, run a shift check on camera health, clear false alarms, or verify alert webhook signatures.
 ---
 
 # Security & Safety Alert Triage & Notification Routing
@@ -42,13 +42,13 @@ Report:
 
 ## Part 2: Workspace Notification Channels
 
-Ceptory supports up to **20 workspace-wide notification channels** configured via `GET /api/cameras/channels` and `PUT /api/cameras/channels` (or in the Ceptory dashboard), plus per-camera Discord webhooks via `create_camera` / `update_camera` and `test_discord_webhook`.
+The platform supports up to **20 workspace-wide notification channels** configured via `GET /api/cameras/channels` and `PUT /api/cameras/channels` (or in the dashboard), plus per-camera Discord webhooks via `create_camera` / `update_camera` and `test_discord_webhook`.
 
 ### Supported Channel Types
 
 | `type` | `target` Format | Notes |
 |---|---|---|
-| `slack` | `https://hooks.slack.com/(services\|workflows\|triggers)/...` | Sends rich Block Kit message with camera, workflow, severity, image, Ceptory link, and OpenStreetMap link if geo-located. |
+| `slack` | `https://hooks.slack.com/(services\|workflows\|triggers)/...` | Sends rich Block Kit message with camera, workflow, severity, image, dashboard link, and OpenStreetMap link if geo-located. |
 | `teams` | `https://<host>` on `webhook.office.com`, `logic.azure.com`, or `environment.api.powerplatform.com` | Sends Adaptive Card v1.4 with facts, image, and OpenUrl actions. |
 | `discord` | `https://discord.com/api/webhooks/...` | Testable via MCP tool `test_discord_webhook({ url, camera_name })`. |
 | `email` | Up to 10 comma-separated email addresses | Formatted HTML + plain-text alert with snapshot and map link. |
@@ -61,9 +61,9 @@ Each channel object supports:
 - `cameraIds`: Array of camera IDs (empty = all cameras).
 - `enabled`: Boolean toggle without deleting the channel.
 
-## Part 3: Verifying Custom Ceptory Alert Webhooks
+## Part 3: Verifying Custom Alert Webhooks
 
-When `type` is `"webhook"`, Ceptory sends `POST` with `Content-Type: application/json`, `User-Agent: Ceptory-Alerts/1.0`, and two signature headers:
+When `type` is `"webhook"`, the server sends `POST` with `Content-Type: application/json`, `User-Agent: Ceptory-Alerts/1.0`, and two signature headers:
 - `X-Ceptory-Timestamp`: Unix epoch seconds (string)
 - `X-Ceptory-Signature`: `sha256=<hex>` computed as `HMAC-SHA256(secret, "${timestamp}.${rawBody}")`
 
@@ -97,7 +97,7 @@ When `type` is `"webhook"`, Ceptory sends `POST` with `Content-Type: application
 ```ts
 import { createHmac, timingSafeEqual } from "node:crypto";
 
-export function verifyCeptoryWebhook(rawBody: string, headers: Headers, secret: string): boolean {
+export function verifyAlertWebhook(rawBody: string, headers: Headers, secret: string): boolean {
   const ts = headers.get("x-ceptory-timestamp");
   const sig = headers.get("x-ceptory-signature");
   if (!ts || !sig?.startsWith("sha256=")) return false;

@@ -1,18 +1,18 @@
 ---
 name: video-search
-description: Index recorded videos from HTTPS URLs or local uploads (up to 2 GB), search across visual scenes, spoken audio, and on-screen text in natural language, run grounded video Q&A, and automate video indexing pipelines via Ceptory MCP or REST API (/api/v1/indexes). Use whenever a user wants to upload, index, semantically search, query, or summarize recorded video footage.
+description: Index recorded videos from HTTPS URLs or local uploads (up to 2 GB), search across visual scenes, spoken audio, and on-screen text in natural language, run grounded video Q&A, and automate video indexing pipelines via MCP or REST API (/api/v1/indexes). Use whenever a user wants to upload, index, semantically search, query, or summarize recorded video footage.
 ---
 
 # Natural-Language Video Search & Q&A
 
-Index recorded video footage into Ceptory and retrieve exact timestamped moments using natural language, visual + audio RAG Q&A, and structured multimodal analysis.
+Index recorded video footage and retrieve exact timestamped moments using natural language, visual + audio RAG Q&A, and structured multimodal analysis.
 
 ## Choose Your Interface
 
 - **Interactive agent workflows (MCP)**: Uses video chats (`create_chat`, `add_video_from_url`, `create_upload_url` + `complete_upload`, `search_videos`, `ask_video`, `analyze_video`, `get_video`).
 - **Backend / programmatic pipelines (REST API v1)**: Uses `https://www.ceptory.com/api/v1/indexes` with `Authorization: Bearer <API_KEY>` (no client SDK; use standard HTTP / `fetch` / `curl`).
 
-## Workflow A: Via Ceptory MCP
+## Workflow A: Via MCP
 
 ### 1. Create or Pick a Video Chat
 - Call `list_chats` to reuse an existing workspace chat, or `create_chat({ title })` to keep one workflow/site per chat (mixing unrelated footage reduces search precision).
@@ -47,7 +47,7 @@ Index recorded video footage into Ceptory and retrieve exact timestamped moments
 
 ### 4. Search, Ask & Analyze
 - **Semantic moment search (`search_videos`)**: Returns up to 6 reranked matches with `videoId`, `startSec`, `endSec`, `score`, and `snippet`. Supports optional `video_id`, `min_score` (`0`–`1`), `from_sec`, and `to_sec`.
-- **Single-video Q&A (`ask_video`)**: Pass `video_id` and `question`; Ceptory inspects relevant clips and answers with the time ranges it used.
+- **Single-video Q&A (`ask_video`)**: Pass `video_id` and `question`; the server inspects relevant clips and answers with the time ranges it used.
 - **Full written analysis (`analyze_video`)**: Pass `chat_id`, optional `video_id` (defaults to the latest `READY` video), and a custom `prompt` (up to 4,000 chars). Without a prompt, summarizes scene, people, objects, and events. Can take up to 60 seconds.
 
 ## Workflow B: Via REST API v1

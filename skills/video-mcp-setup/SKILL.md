@@ -1,11 +1,11 @@
 ---
-name: ceptory-mcp-setup
-description: Set up and connect Ceptory's official MCP server (https://mcp.ceptory.com/mcp) or stdio bridge (npx -y ceptory-mcp) in Claude Code, Claude Desktop, claude.ai, Cursor, VS Code, Codex, Gemini CLI, Windsurf, Antigravity, OpenAI Agents SDK, LangChain, Mastra, or n8n. Covers OAuth 2.1 browser sign-in, Bearer tokens, local file upload helpers, workspace RBAC/balance checks, and troubleshooting 401/402/429 errors. Use whenever a user asks to set up Ceptory MCP, connect an AI agent to Ceptory, or configure MCP tools for video intelligence and CCTV cameras.
+name: video-mcp-setup
+description: Set up and connect the video intelligence MCP server (hosted at https://mcp.ceptory.com/mcp) or stdio bridge (npx -y ceptory-mcp) in Claude Code, Claude Desktop, claude.ai, Cursor, VS Code, Codex, Gemini CLI, Windsurf, Antigravity, OpenAI Agents SDK, LangChain, Mastra, or n8n. Covers OAuth 2.1 browser sign-in, Bearer tokens, local file upload helpers, workspace RBAC/balance checks, and troubleshooting 401/402/429 errors. Use whenever a user asks to set up the video MCP server, connect an AI agent to video search or cameras, or configure MCP tools for video intelligence and CCTV cameras.
 ---
 
-# Ceptory MCP Server Setup & Agent Connection
+# Video Intelligence MCP Server Setup & Agent Connection
 
-Connect any Model Context Protocol (MCP) client or agent framework to [Ceptory](https://www.ceptory.com) so your agent can watch and search video, configure live camera workflows, triage alerts, trace cross-camera movement, and run AI detection engines—acting as the signed-in user with their workspace permissions and prepaid balance.
+Connect any Model Context Protocol (MCP) client or agent framework to the video intelligence MCP server so your agent can watch and search video, configure live camera workflows, triage alerts, trace cross-camera movement, and run AI detection engines—acting as the signed-in user with their workspace permissions and prepaid balance.
 
 ## Official Endpoints & Links
 
@@ -22,7 +22,7 @@ Connect any Model Context Protocol (MCP) client or agent framework to [Ceptory](
 1. **OAuth 2.1 with PKCE (recommended for interactive clients)**
    - Paste only the URL `https://mcp.ceptory.com/mcp`.
    - Clients discover OAuth automatically (`401` → `WWW-Authenticate` `resource_metadata` → `https://www.ceptory.com/.well-known/oauth-authorization-server`, dynamic client registration).
-   - Opens Ceptory in the browser so you click **Allow**—no API key to copy. Sessions last 30 days and can be revoked instantly at `/dashboard/mcp`.
+   - Opens the sign-in page in the browser so you click **Allow**—no API key to copy. Sessions last 30 days and can be revoked instantly at `/dashboard/mcp`.
 2. **Bearer Token (headless agents, CI, servers, or stdio bridge)**
    - Create a token at `https://www.ceptory.com/dashboard/mcp`.
    - Pass `Authorization: Bearer <token>` over Streamable HTTP, or pass `CEPTORY_TOKEN=<token>` to `npx -y ceptory-mcp`.
@@ -32,20 +32,20 @@ Connect any Model Context Protocol (MCP) client or agent framework to [Ceptory](
 ### Claude Code
 ```bash
 # OAuth 2.1 (then run /mcp in Claude Code → Authenticate)
-claude mcp add --transport http ceptory https://mcp.ceptory.com/mcp
+claude mcp add --transport http video-intel https://mcp.ceptory.com/mcp
 
 # Or Bearer token
-claude mcp add --transport http ceptory https://mcp.ceptory.com/mcp \
+claude mcp add --transport http video-intel https://mcp.ceptory.com/mcp \
   --header "Authorization: Bearer $CEPTORY_TOKEN"
 ```
 
 ### Claude Desktop & claude.ai
-- **Connectors UI (OAuth)**: `Settings → Connectors → Add custom connector` → Name: `Ceptory`, URL: `https://mcp.ceptory.com/mcp`, then click **Connect**.
+- **Connectors UI (OAuth)**: `Settings → Connectors → Add custom connector` → Name: `Video Intelligence`, URL: `https://mcp.ceptory.com/mcp`, then click **Connect**.
 - **Token via stdio (`claude_desktop_config.json`)** *(also unlocks one-step local file `upload_video_file` and `image_path`)*:
 ```json
 {
   "mcpServers": {
-    "ceptory": {
+    "video-intel": {
       "command": "npx",
       "args": ["-y", "ceptory-mcp"],
       "env": { "CEPTORY_TOKEN": "<token>" }
@@ -58,7 +58,7 @@ claude mcp add --transport http ceptory https://mcp.ceptory.com/mcp \
 ```json
 {
   "mcpServers": {
-    "ceptory": {
+    "video-intel": {
       "url": "https://mcp.ceptory.com/mcp"
     }
   }
@@ -70,7 +70,7 @@ claude mcp add --transport http ceptory https://mcp.ceptory.com/mcp \
 ```json
 {
   "servers": {
-    "ceptory": {
+    "video-intel": {
       "type": "http",
       "url": "https://mcp.ceptory.com/mcp"
     }
@@ -81,12 +81,12 @@ claude mcp add --transport http ceptory https://mcp.ceptory.com/mcp \
 ### OpenAI Codex CLI
 ```bash
 # OAuth
-codex mcp add ceptory --url https://mcp.ceptory.com/mcp
-codex mcp login ceptory
+codex mcp add video-intel --url https://mcp.ceptory.com/mcp
+codex mcp login video-intel
 ```
 Or with stdio token in `~/.codex/config.toml`:
 ```toml
-[mcp_servers.ceptory]
+[mcp_servers.video-intel]
 command = "npx"
 args = ["-y", "ceptory-mcp"]
 env = { CEPTORY_TOKEN = "<token>" }
@@ -96,19 +96,19 @@ env = { CEPTORY_TOKEN = "<token>" }
 ```json
 {
   "mcpServers": {
-    "ceptory": {
+    "video-intel": {
       "httpUrl": "https://mcp.ceptory.com/mcp"
     }
   }
 }
 ```
-Then run `/mcp auth ceptory`.
+Then run `/mcp auth video-intel`.
 
 ### Windsurf (`~/.codeium/windsurf/mcp_config.json`)
 ```json
 {
   "mcpServers": {
-    "ceptory": {
+    "video-intel": {
       "serverUrl": "https://mcp.ceptory.com/mcp"
     }
   }

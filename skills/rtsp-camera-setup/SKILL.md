@@ -1,15 +1,15 @@
 ---
 name: rtsp-camera-setup
-description: Connect existing on-premises IP cameras, NVRs, DVRs, and analog CCTV to cloud video search over outbound HTTPS (no port forwarding, local credentials, local motion gating) using Ceptory Edge. Includes H.264 sub-stream RTSP URL templates for 15+ brands (Hikvision, Dahua, CP Plus, Axis, Reolink, Uniview, UniFi Protect, EZVIZ, Tapo, Hanwha, Bosch, ONVIF) and edge.toml generation. Use whenever a user wants to connect CCTV or an NVR/DVR, find RTSP URLs, or troubleshoot ONVIF streams.
+description: Connect existing on-premises IP cameras, NVRs, DVRs, and analog CCTV to cloud video search over outbound HTTPS (no port forwarding, local credentials, local motion gating) using a lightweight edge agent. Includes H.264 sub-stream RTSP URL templates for 15+ brands (Hikvision, Dahua, CP Plus, Axis, Reolink, Uniview, UniFi Protect, EZVIZ, Tapo, Hanwha, Bosch, ONVIF) and edge.toml generation. Use whenever a user wants to connect CCTV or an NVR/DVR, find RTSP URLs, or troubleshoot ONVIF streams.
 ---
 
 # On-Prem RTSP & ONVIF CCTV Camera Integration
 
-Connect existing LAN cameras, NVRs, and DVRs to Ceptory without replacing hardware, opening firewall ports, or exposing camera passwords to the internet.
+Connect existing LAN cameras, NVRs, and DVRs to cloud video search without replacing hardware, opening firewall ports, or exposing camera passwords to the internet.
 
 ## Architecture Principles
 
-- **Outbound HTTPS only**: Ceptory Edge runs on a local machine on the camera LAN (mini-PC, NAS with Docker, Raspberry Pi 5, or Linux/Windows/Mac host) and makes outbound HTTPS calls to Ceptory and S3. **Never recommend port forwarding.**
+- **Outbound HTTPS only**: The edge agent (`ceptory-edge`) runs on a local machine on the camera LAN (mini-PC, NAS with Docker, Raspberry Pi 5, or Linux/Windows/Mac host) and makes outbound HTTPS calls to the video backend and S3. **Never recommend port forwarding.**
 - **Local credentials**: RTSP URLs and camera passwords stay in `edge.toml` on the edge machine (use `${ENV_VAR}` interpolation).
 - **Motion-gated cost control**: Cuts RTSP streams into 10-second segments (stream copy, low CPU), checks local greyscale motion, and uploads only active clips + pre/post-roll so you don't pay to index empty hours.
 - **Resilient outbox**: Clips queue locally (`max_outbox_mb`) and upload reliably after internet outages.
@@ -23,7 +23,7 @@ Always use the **H.264 sub stream** (~640×360 or 640×480, 10–15 fps, Smart C
 | **Hikvision** (HiLook, Prama, NVRs/DVRs) | `554` / `admin` | `rtsp://{user}:{pass}@{host}:{port}/Streaming/Channels/{ch}02` (`{ch}01` = main) |
 | **Dahua** (Amcrest, Lorex, Imou, NVRs/XVRs) | `554` / `admin` | `rtsp://{user}:{pass}@{host}:{port}/cam/realmonitor?channel={ch}&subtype=1` (`subtype=0` = main) |
 | **CP Plus** (DVRs, NVRs, HDCVI via DVR) | `554` / `admin` | `rtsp://{user}:{pass}@{host}:{port}/cam/realmonitor?channel={ch}&subtype=1` |
-| **Axis** | `554` / `ceptory` | `rtsp://{user}:{pass}@{host}:{port}/axis-media/media.amp?videocodec=h264&resolution=640x360&fps=15` |
+| **Axis** | `554` / `viewer` | `rtsp://{user}:{pass}@{host}:{port}/axis-media/media.amp?videocodec=h264&resolution=640x360&fps=15` |
 | **Reolink** (PoE / wired Wi-Fi / NVRs) | `554` / `admin` | `rtsp://{user}:{pass}@{host}:{port}/h264Preview_{ch2}_sub` (`ch2` = 2-digit, e.g. `01`; enable RTSP in Network → Port Settings) |
 | **Uniview (UNV)** | `554` / `admin` | `rtsp://{user}:{pass}@{host}:{port}/media/video2` (NVRs: `/unicast/c{ch}/s1/live`) |
 | **UniFi Protect** | `7447` / *(none)* | `rtsp://{console_ip}:7447/{token}` (host = UniFi console; extract token from Protect RTSPS URL) |

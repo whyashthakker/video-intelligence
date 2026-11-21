@@ -1,21 +1,21 @@
 ---
 name: watch-video
-description: Give any LLM or AI agent vision over local or remote video files (MP4, MOV, WebM). Upload or link a screen recording, bug repro, CCTV clip, drone flight, or product demo, read its chronological visual and audio timeline, search for exact moments in plain English, ask grounded visual questions, and zoom into individual frames with ffmpeg or vision detectors via Ceptory MCP. Use whenever a user asks an agent to watch a video, look at a video, debug a screen recording, or explain what happens in footage.
+description: Give any LLM or AI agent vision over local or remote video files (MP4, MOV, WebM). Upload or link a screen recording, bug repro, CCTV clip, drone flight, or product demo, read its chronological visual and audio timeline, search for exact moments in plain English, ask grounded visual questions, and zoom into individual frames with ffmpeg or vision detectors via MCP. Use whenever a user asks an agent to watch a video, look at a video, debug a screen recording, or explain what happens in footage.
 ---
 
 # Watch & Inspect Video With Any LLM
 
-Most LLMs cannot natively watch long video files without blowing through context limits or missing transient visual and spoken details. This skill gives any MCP-connected LLM a fast, accurate, token-efficient protocol to "watch" and reason over any video using [Ceptory](https://www.ceptory.com).
+Most LLMs cannot natively watch long video files without blowing through context limits or missing transient visual and spoken details. This skill gives any MCP-connected LLM a fast, accurate, token-efficient protocol to "watch" and reason over any video through a video intelligence MCP server.
 
 ## Prerequisites
 
-- Ceptory MCP connected (`https://mcp.ceptory.com/mcp` via OAuth 2.1, or `CEPTORY_TOKEN=<token> npx -y ceptory-mcp` for direct local file uploads) — see the `ceptory-mcp-setup` skill or [ceptory.com/mcp](https://www.ceptory.com/mcp).
-- Or a Ceptory REST API key (`https://www.ceptory.com/api/v1`) for scriptable pipelines.
+- A video intelligence MCP server connected (e.g. `https://mcp.ceptory.com/mcp` via OAuth 2.1, or `CEPTORY_TOKEN=<token> npx -y ceptory-mcp` for direct local file uploads) — see the `video-mcp-setup` skill or [ceptory.com/mcp](https://www.ceptory.com/mcp).
+- Or a REST API key (`https://www.ceptory.com/api/v1`) for scriptable pipelines.
 - Free workspaces include starter video indexing minutes; check balance anytime with `get_account`.
 
 ## The 5-Step "Watch a Video" Protocol
 
-### Step 1: Ingest the Video into Ceptory
+### Step 1: Ingest the Video
 Create or reuse a video chat (`create_chat({ title })`), then add the video:
 - **Public HTTPS URL** (direct `.mp4`/`.mov`/`.webm` or presigned cloud URL):
   ```json
@@ -60,16 +60,16 @@ When looking for a specific action, bug, object, quote, or on-screen text:
 - Returns up to 6 reranked timestamped hits (`startSec`, `endSec`, `score`, `snippet`).
 
 ### Step 4: Ask Visual Questions & Synthesize (`ask_video` / `analyze_video`)
-- **Targeted Q&A (`ask_video`)**: Ask a concrete question about one video (`ask_video({ video_id, question })`). Ceptory inspects the relevant video clips and returns a grounded answer with the exact time ranges it watched.
+- **Targeted Q&A (`ask_video`)**: Ask a concrete question about one video (`ask_video({ video_id, question })`). The server inspects the relevant video clips and returns a grounded answer with the exact time ranges it watched.
 - **Full structured breakdown (`analyze_video`)**: Pass `chat_id`, `video_id`, and a structured `prompt` (up to 4,000 chars) to extract step-by-step timelines, defect lists, scene changes, or executive summaries.
 
 ### Step 5: Optional Pixel-Level Frame Inspection (When Exact Details Matter)
-If the user needs exact UI text, fine print, small defects, or visual object boxes at a timestamp Ceptory identified:
+If the user needs exact UI text, fine print, small defects, or visual object boxes at a timestamp the search identified:
 1. Extract the exact frame locally with `ffmpeg`:
    ```bash
    ffmpeg -ss 00:01:42 -i /path/to/video.mp4 -frames:v 1 -q:v 2 frame_102s.jpg
    ```
-2. Either inspect the extracted image directly in a multimodal LLM turn, OR run a specialized Ceptory detector via `run_engine({ engine_id, image_base64, annotate: true })` (discover available detectors with `list_engines`) to get structured bounding boxes and an annotated JPEG.
+2. Either inspect the extracted image directly in a multimodal LLM turn, OR run a specialized detector via `run_engine({ engine_id, image_base64, annotate: true })` (discover available detectors with `list_engines`) to get structured bounding boxes and an annotated JPEG.
 
 ## High-Value Use Cases
 
@@ -83,7 +83,7 @@ If the user needs exact UI text, fine print, small defects, or visual object box
 
 ## Accuracy & Grounding Guardrails
 
-- **Always cite timestamps (`MM:SS` or `HH:MM:SS`)** returned by Ceptory so the user can verify every claim in seconds.
+- **Always cite timestamps (`MM:SS` or `HH:MM:SS`)** returned by the tools so the user can verify every claim in seconds.
 - **Never hallucinate unseen details**: If a label, plate, or screen element is unreadable due to resolution or motion blur, say so explicitly and mark it `"unconfirmed"`.
 - **Mind workspace balance**: Indexing, search, analysis, and engine calls use workspace allowance/prepaid balance (`get_account`); confirm before indexing very large batches of long videos.
-- **Learn more**: [ceptory.com](https://www.ceptory.com) · [ceptory.com/mcp](https://www.ceptory.com/mcp) · [ceptory.com/skills](https://www.ceptory.com/skills)
+- **MCP server docs**: [ceptory.com/mcp](https://www.ceptory.com/mcp)
